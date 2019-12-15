@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>D3 Dev Env</title>
-    <meta name="Stacked Chart" >
+    <meta name="Stacked Chart">
     <meta charset="utf-8">
     <script src="d3/d3.js"></script>
-    <script src="src/main.js"></script>
 </head>
+
 <body>
-	<canvas id="canvas" width="1080" height="500"></canvas>
-	<div id="mouseDiv"></div>
-	<div id="nearFar"></div>
-	<!-- <button class="button_data" onclick="switchSource()">switchSource</button> -->
+    <p></p>
+    <p></p>
+    <p></p>
+    <script type="text/javascript">; var dataset = ["I like dogs", "I like cats", "I like snakes"];
+        var body = d3.select("body");
+        var p = body.selectAll("p");
+        p.data(dataset)
+            .text(function (d, i) {
+                return d;
+            });
+    </script>
 </body>
+
 </html>
