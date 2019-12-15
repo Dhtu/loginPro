@@ -5,21 +5,14 @@
     <title>D3 Dev Env</title>
     <meta name="Stacked Chart">
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <script src="d3/d3.js"></script>
+    
 </head>
 
 <body>
-    <p></p>
-    <p></p>
-    <p></p>
-    <script type="text/javascript">; var dataset = ["I like dogs", "I like cats", "I like snakes"];
-        var body = d3.select("body");
-        var p = body.selectAll("p");
-        p.data(dataset)
-            .text(function (d, i) {
-                return d;
-            });
-    </script>
+    <div id="chart"></div>
+    <script src="src/main.js"></script>
 </body>
 
 </html>
