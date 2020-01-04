@@ -1,3 +1,5 @@
+
+
 // document.getElementById("upload").addEventListener("change", function() {
 //     var files = this.files;
 //     if(files.length == 0) {
@@ -19,53 +21,68 @@
 
 //     }
 // })
-window.logData = [];
-window.logData.index = 1;
-window.logData.length = 31;
-window.count = {};
-window.num=0;
+logData = [];
+logData.index = 1;
+logData.length = 31;
+user = {};
+ip = {};
+num = 0;
 var loadData = function () {
 	for (var i = 1; i < 10; i++) {
 		d3.csv("data/2017-11-0" + i + "/login.csv", function (data) {
-			window.logData[window.logData.index++] = data;
-			if (!window.count[data.user]) {
-				window.num++;
-				window.count[data.user]={};
-				window.count[data.user].count = 1;
-				window.count[data.user].IPlist = [data.sip];
-			}else if(window.count[data.user].IPlist.indexOf(data.sip)===-1){
-				window.count[data.user].count++;
-				window.count[data.user].IPlist.push(data.sip);
+			logData.push(data);
+			if (!user[data.user]) {
+				num++;
+				user[data.user] = {};
+				user[data.user].count = 1;
+				user[data.user].IPlist = [data.sip];
+			} else if (user[data.user].IPlist.indexOf(data.sip) === -1) {
+				user[data.user].count++;
+				user[data.user].IPlist.push(data.sip);
 			};
-			// window.count[data.user].count++;
+			// user[data.user].count++;
+
+			if(!ip[data.user]){
+				ip[data.sip]=[];
+			}
+			ip[data.sip].push(data.user);
 		})
 	}
 	for (var i = 10; i <= 30; i++) {
 		d3.csv("data/2017-11-" + i + "/login.csv", function (data) {
-			window.logData[window.logData.index++] = data;
-			if (!window.count[data.user]) {
-				window.count[data.user]={};
-				window.count[data.user].count = 0;
-				window.count[data.user].IPlist = [data.sip];
-			}else if(window.count[data.user].IPlist.indexOf(data.sip)===-1){
-				window.count[data.user].count++;
-				window.count[data.user].IPlist.push(data.sip);
+			logData.push(data);
+			if (!user[data.user]) {
+				user[data.user] = {};
+				user[data.user].count = 0;
+				user[data.user].IPlist = [data.sip];
+			} else if (user[data.user].IPlist.indexOf(data.sip) === -1) {
+				user[data.user].count++;
+				user[data.user].IPlist.push(data.sip);
 			};
-			// window.count[data.user].count++;
+			// user[data.user].count++;
+			if(!ip[data.user]){
+				ip[data.sip]=[];
+			}
+			ip[data.sip].push(data.user);
 		})
 	}
 }
 loadData();
+// userStr = JSON.stringify(user);
+// // filePath = "out/user";
+// // fw = new FileWriter(filePath);
+// // fw.write(userStr);
+// document.write(userStr);
 
 // d3.csv("data/2017-11-01/login.csv", function (data) {
-// 	window.logData[window.logData.index++] = data;
-// 			if (!window.count[data.user]) {
-// 				window.count[data.user]={};
-// 				window.count[data.user].count = 1;
-// 				window.count[data.user].IPlist = [data.sip];
-// 			}else if(window.count[data.user].IPlist.indexOf(data.sip)===-1){
-// 				window.count[data.user].count++;
-// 				window.count[data.user].IPlist.push(data.sip);
+// 	logData[logData.index++] = data;
+// 			if (!user[data.user]) {
+// 				user[data.user]={};
+// 				user[data.user].count = 1;
+// 				user[data.user].IPlist = [data.sip];
+// 			}else if(user[data.user].IPlist.indexOf(data.sip)===-1){
+// 				user[data.user].count++;
+// 				user[data.user].IPlist.push(data.sip);
 // 			};
 // })
 
